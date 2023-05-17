@@ -4,7 +4,7 @@ const WebSocket = require('ws');
 const ws = new WebSocket('ws://127.0.0.1:59001');
 const { Buffer } = require('buffer');
 const {X509Certificate} = require('crypto');
-const test = require("./xypClientCode");
+const XypClientCode = require("./xypClientCode");
 let serialNumber ='';
 let  signature ='';
 //#region Methods
@@ -66,8 +66,8 @@ function onError(error) {
 
 function onClose() {
     if(serialNumber != '' || signature != ''){
-        let kk = new test();
-        kk.XypClientSignature(signature, serialNumber, time);
+        let xypClientCode = new XypClientCode();
+        xypClientCode.XypClientSignature(signature, serialNumber, time);
     }
     console.log('WebSocket closed');
 }
