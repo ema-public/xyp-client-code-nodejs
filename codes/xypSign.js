@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const sign = crypto.createSign('SHA256');
+const xypSign = crypto.createSign('SHA256');
 const fs = require('fs')
 
 class Sign{
@@ -11,11 +11,11 @@ class Sign{
 
     sign(){
         var signData = this.AccessToken + "." + this.Timestamp;
-        sign.write(signData);
-        sign.end();
+        xypSign.write(signData);
+        xypSign.end();
 
         const key = fs.readFileSync(this.KeyPath);
-        var signature_b64 = sign.sign(key, 'base64');
+        var signature_b64 = xypSign.sign(key, 'base64');
         
         return {
             accessToken: this.AccessToken,

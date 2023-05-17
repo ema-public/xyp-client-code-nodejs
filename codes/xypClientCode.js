@@ -1,5 +1,5 @@
 require('dotenv').config();
-const sign = require("./sign");
+const sign = require("./xypSign");
 
 process.title = 'node-chat';
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
@@ -15,7 +15,7 @@ const fs = require('fs');
 const key = fs.readFileSync(process.env.XYP_KEY);
 let url = 'https://xyp.gov.mn/citizen-1.5.0/ws?WSDL';
 
-class Test{
+class XypClientCode {
     constructor(){
     }
 
@@ -94,7 +94,7 @@ class Test{
         });
     }
 }
-module.exports = Test;
+module.exports = XypClientCode;
 
 
     

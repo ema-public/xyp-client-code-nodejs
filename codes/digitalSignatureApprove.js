@@ -4,7 +4,7 @@ const WebSocket = require('ws');
 const ws = new WebSocket('ws://127.0.0.1:59001');
 const { Buffer } = require('buffer');
 const {X509Certificate} = require('crypto');
-const test = require("./test");
+const test = require("./xypClientCode");
 let serialNumber ='';
 let  signature ='';
 //#region Methods
