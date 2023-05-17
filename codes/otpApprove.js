@@ -11,7 +11,7 @@ const signData = data.sign();
 /**
  * OTP код авах WS100008_registerOTPRequest сервисийг ашиглаж WS100101_getCitizenIDCardInfo сервисийг ашиглах хүсэлтийг sms-ээр явуулах
  *
- * @author buyndelger
+ * @author buyandelger
  * @since 2023-05-17
  */
 
@@ -41,7 +41,7 @@ soap.createClient(url, {endpoint: url}, function (err, client) {
  * OTP авах амжилттай болсон тохиолдолд иргэнд ирсэн кодыг ашиглаж сервис дуудах
  * @param resultCode WS100008_registerOTPRequest сервис амжилттай дуудагдсан эсэх
  *
- * @author buyndelger
+ * @author buyandelger
  * @since 2023-05-17
  */
 function callOTP(resultCode) {

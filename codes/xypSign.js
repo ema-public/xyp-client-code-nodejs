@@ -9,7 +9,7 @@ class Sign {
      * @param accessToken ҮДТ-өөс олгогдсон аccesstoken ийн мэдээлэл
      * @param time timestamp мэдээлэл
      *
-     * @author buyndelger
+     * @author buyandelger
      * @since 2023-05-17
      */
     constructor(keyPath, accessToken, time) {
