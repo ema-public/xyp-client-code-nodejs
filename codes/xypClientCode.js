@@ -56,9 +56,12 @@ class XypClientCode {
     });
     }
 
-    XypClientOTP(otp, time) {
-        var data = new sign(process.env.XYP_KEY, process.env.XYP_TOKEN, time);
-        var signData = data.sign();
+    XypClientOTP(otp, time, signData) {
+        console.log('OTP: ' + otp);
+        console.log('Time: ' + time);
+
+        // var data = new sign(process.env.XYP_KEY, process.env.XYP_TOKEN, time);
+        // var signData = data.sign();
     
         var args = {
             'request': {
@@ -67,9 +70,7 @@ class XypClientCode {
                     'citizen': {
                         'civilId': '',
                         'regnum': process.env.REGNUM,
-                        'certFingerprint': '',
                         'fingerprint': '',  
-                        'signature': '',
                         'otp':otp
                     },
                     'operator': {
