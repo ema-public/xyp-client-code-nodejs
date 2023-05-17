@@ -3,91 +3,85 @@ const sign = require("./xypSign");
 
 process.title = 'node-chat';
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
-// let data = digitalSignature.digitalSign();
-// let signature = data.signature;
-// let serialNumber = data.serialNumber;
 
-
-const crypto = require('crypto');
 const soap = require('soap');
-const fs = require('fs');
-
-const key = fs.readFileSync(process.env.XYP_KEY);
 let url = 'https://xyp.gov.mn/citizen-1.5.0/ws?WSDL';
 
 class XypClientCode {
-    constructor(){
+    constructor() {
     }
 
+    /**
+     * Иргэнийг тоон гарын үсгээр баталгаажуулж WS100101_getCitizenIDCardInfo сервисийн 1.5.0 хувилбарыг дуудах
+     * @param signature regnum.timestamp датаг тоон гарын үсгээр баталгаажуулсан дата
+     * @param serialNumber иргэний тоон гарын үсгийн сериал дугаар
+     * @param time тоон гарын үсэг зурхад ашиглагдсан timestamp
+     *
+     * @author buyndelger
+     * @since 2023-05-17
+     */
     XypClientSignature(signature, serialNumber, time) {
-    var data = new sign(process.env.XYP_KEY, process.env.XYP_TOKEN, time);
-    var signData = data.sign();
-
-    var args = {
-        'request': {
-            'regnum': process.env.REGNUM, 
-            'auth': {
-                'citizen': {
-                    'civilId': '',
-                    'regnum': process.env.REGNUM,
-                    'certFingerprint': serialNumber,
-                    'fingerprint': '',  
-                    'signature': signature
-                },
-                'operator': {
-                    'regnum': '', 
-                    'fingerprint': '', 
-        
-                }
-            }, 
-        },
-    };
-    
-    soap.createClient(url, {endpoint : url}, function(err, client) {
-        client.addHttpHeader('accessToken', signData.accessToken);
-        client.addHttpHeader('timeStamp', signData.timeStamp.toString());
-        client.addHttpHeader('signature', signData.signature);
-        
-        client.WS100101_getCitizenIDCardInfo(args, function(err, result) {
-            console.log(err);
-            console.log(result);
-            console.log(result.return.request.auth.citizen);
-        });
-    });
-    }
-
-    XypClientOTP(otp, time, signData) {
-        console.log('OTP: ' + otp);
-        console.log('Time: ' + time);
-
-        // var data = new sign(process.env.XYP_KEY, process.env.XYP_TOKEN, time);
-        // var signData = data.sign();
-    
-        var args = {
+        const data = new sign(process.env.XYP_KEY, process.env.XYP_TOKEN, time);
+        const signData = data.sign();
+        const args = {
             'request': {
-                'regnum': process.env.REGNUM, 
-                'auth': {
+                'regnum': process.env.REGNUM, 'auth': {
                     'citizen': {
                         'civilId': '',
                         'regnum': process.env.REGNUM,
-                        'fingerprint': '',  
-                        'otp':otp
-                    },
-                    'operator': {
-                        'regnum': '', 
-                        'fingerprint': '', 
-            
+                        'certFingerprint': serialNumber,
+                        'fingerprint': '',
+                        'signature': signature
+                    }, 'operator': {
+                        'regnum': '', 'fingerprint': '',
+
                     }
-                }, 
+                },
             },
         };
-        
-        soap.createClient(url, {endpoint : url}, function(err, client) {
+
+        soap.createClient(url, {endpoint: url}, function (err, client) {
             client.addHttpHeader('accessToken', signData.accessToken);
             client.addHttpHeader('timeStamp', signData.timeStamp.toString());
             client.addHttpHeader('signature', signData.signature);
-            
-            client.WS100101_getCitizenIDCardInfo(args, function(err, result) {
+
+            client.WS100101_getCitizenIDCardInfo(args, function (err, result) {
+                console.log(err);
+                console.log(result);
+                console.log(result.return.request.auth.citizen);
+            });
+        });
+    }
+
+    /**
+     * Иргэнийг OTP кодоор баталгаажуулж WS100101_getCitizenIDCardInfo сервисийн 1.5.0 хувилбарыг дуудах
+     * @param otp иргэнд мэдэгдлээр очсон otp дугаар
+     * @param time тоон гарын үсэг зурхад ашиглагдсан timestamp
+     * @param signData otp дугаар авах үед ашиглагдсан хурSign -н мэдээлэл
+     *
+     * @author buyndelger
+     * @since 2023-05-17
+     */
+    XypClientOTP(otp, time, signData) {
+        const args = {
+            'request': {
+                'regnum': process.env.REGNUM, 'auth': {
+                    'citizen': {
+                        'civilId': '', 'regnum': process.env.REGNUM, 'fingerprint': '', 'otp': otp
+                    }, 'operator': {
+                        'regnum': '', 'fingerprint': '',
+
+                    }
+                },
+            },
+        };
+
+        soap.createClient(url, {endpoint: url}, function (err, client) {
+            client.addHttpHeader('accessToken', signData.accessToken);
+            client.addHttpHeader('timeStamp', signData.timeStamp.toString());
+            client.addHttpHeader('signature', signData.signature);
+
+            client.WS100101_getCitizenIDCardInfo(args, function (err, result) {
                 console.log(err);
                 console.log(result);
                 console.log(result.return.request.auth.citizen);
@@ -95,6 +89,7 @@ class XypClientCode {
         });
     }
 }
+
 module.exports = XypClientCode;
 
 
