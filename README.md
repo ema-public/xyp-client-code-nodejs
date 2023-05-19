@@ -5,7 +5,7 @@
     node version v18.16.0
     npm version 9.5.1
 
-.env файлд шаардлагатай мэдээллийг бөглөх. Үүнд:
+[.env](./.env) файлд шаардлагатай мэдээллийг бөглөх. Үүнд:
 ```bash
 #ҮДТ - өөс олгогдсон accessToken мэдээлэл
 XYP_TOKEN = "1d2f1d2fs3d2f1s35sf3sd1f2sd"
@@ -19,14 +19,14 @@ SIGNATURE_HOST = "127.0.0.1:97001"
 #Тогтмол 0 утга авна.
 NODE_TLS_REJECT_UNAUTHORIZED  = 0
 ```
-key.key файлд ҮДТ өөс олгогдсон openVPN key-ийн мэдээллийг хуулна.
+[key.key](./key.key) файлд ҮДТ өөс олгогдсон openVPN key-ийн мэдээллийг хуулна.
 
 ## Сервис дуудах
-Иргэнийг тоон гарын үсгээр баталгаажуулан дуудахдаа:
+Иргэнийг тоон гарын үсгээр баталгаажуулан дуудахдаа [digitalSignatureApprove.js](./codes/digitalSignatureApprove.js) кодыг ажиллуулна.
 ```bash 
 node ./codes/digitalSignatureApprove.js
 ```
-Иргэнийг OTP кодоор баталгаажуулан дуудахдаа:
+Иргэнийг OTP кодоор баталгаажуулан дуудахдаа [otpApprove.js](./codes/otpApprove.js) кодыг ажиллуулна.
 ```bash 
 node ./codes/otpApprove.js
 ``` 
