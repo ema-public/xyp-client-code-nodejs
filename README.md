@@ -21,6 +21,7 @@ NODE_TLS_REJECT_UNAUTHORIZED  = 0
 ```
 [key.key](./key.key) файлд ҮДТ өөс олгогдсон openVPN key-ийн мэдээллийг хуулна.
 
+ESIGN клиент програм (Win 7, 8, 10 64 бит) [татах](https://ra.datacenter.gov.mn/software/installer).
 ## Сервис дуудах
 Иргэнийг тоон гарын үсгээр баталгаажуулан дуудахдаа [digitalSignatureApprove.js](./codes/digitalSignatureApprove.js) кодыг ажиллуулна.
 ```bash
