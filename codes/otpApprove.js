@@ -17,9 +17,11 @@ const signData = data.sign();
 
 const args = {
     'request': {
-        'regnum': process.env.REGNUM, 'jsonWSList': JSON.stringify([{
+        'regnum': process.env.REGNUM,
+        'jsonWSList': JSON.stringify([{
             ws: 'WS100101_getCitizenIDCardInfo'
-        }]), 'isSms': 1, 'isApp': 0, 'isEmail': 0, 'isKiosk': 0, 'phoneNum': 0
+        }]),
+        'isSms': 1, 'isApp': 0, 'isEmail': 0, 'isKiosk': 0, 'phoneNum': 0
     },
 };
 
@@ -47,7 +49,6 @@ soap.createClient(url, {endpoint: url}, function (err, client) {
 function callOTP(resultCode) {
     if (resultCode === 0) {
         const otp = prompt("OTP код оруулна уу: ");
-        console.log('You are ${otp} years old.');
         let xypClientCode = new XypClientCode();
         xypClientCode.XypClientOTP(otp, time, signData);
 
