@@ -27,9 +27,7 @@ class XypClientCode {
             'request': {
                 'regnum': process.env.REGNUM, 'auth': {
                     'citizen': {
-                        // 'authType': 1 // OTP
-                        // 'authType': 2 // Тоон гарын үсэг
-                        // 'authType': 3 // Хурууны хээ
+                        'authType': 2, // 1-OTP, 2-Тоон гарын үсэг, 3-Хурууны хээ
                         'civilId': '',
                         'regnum': process.env.REGNUM,
                         'certFingerprint': serialNumber,
@@ -70,10 +68,8 @@ class XypClientCode {
             'request': {
                 'regnum': process.env.REGNUM, 'auth': {
                     'citizen': {
-                        'civilId': '', 'regnum': process.env.REGNUM, 'fingerprint': '', 'otp': otp, 'authType': 1
-                        // 'authType': 1 // OTP
-                        // 'authType': 2 // Тоон гарын үсэг
-                        // 'authType': 3 // Хурууны хээ
+                        'civilId': '', 'regnum': process.env.REGNUM, 'fingerprint': '', 'otp': otp,
+                        'authType': 1 // 1-OTP, 2-Тоон гарын үсэг, 3-Хурууны хээ
                     }, 'operator': {
                         'regnum': '', 'fingerprint': '',
                     }
